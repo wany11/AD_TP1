@@ -23,14 +23,19 @@ true_labels = np.hstack((np.zeros(len(Xclass1)), np.ones(len(Xclass2))))
 
 KMeans = KMeans(n_clusters=2, n_init=10, init='k-means++')
 KMeans.fit(X)
-
 plt.figure(figsize = (12,6))
 
 # Tracer les points avec des symboles et couleurs différents pour chaque classe
 plt.subplot(1,2,1)
-plt.scatter(X[KMeans.labels_ == 0,0],X[KMeans.labels_ == 0,1], c='blue', label="Cluster 1 (k-means", marker='o')
+plt.scatter(X[KMeans.labels_ == 0,0],X[KMeans.labels_ == 0,1], c='blue', label="Cluster 1 (k-means)", marker='o')
 plt.scatter(X[KMeans.labels_ == 1, 0], X[KMeans.labels_ == 1, 1], c='red', label="Cluster 2 (K-means)", marker='s')
 plt.scatter(KMeans.cluster_centers_[:, 0], KMeans.cluster_centers_[:, 1], c='green', label="Centres des clusters", marker='o')
+
+plt.legend()
+plt.xlabel("Mesure 1")
+plt.ylabel("Mesure 2")
+plt.title("test")
+
 
 plt.subplot(1, 2, 2)
 plt.scatter(X[true_labels == 0, 0], X[true_labels == 0, 1], c='red', label="Classe 1 (Vraie)", marker='s')
@@ -43,10 +48,6 @@ plt.xlabel("Mesure 1")
 plt.ylabel("Mesure 2")
 plt.title("Vraie classification")
 
-plt.legend()
-plt.xlabel("Mesure 1")
-plt.ylabel("Mesure 2")
-plt.title("Ensemble de test")
 plt.show()
 
 
