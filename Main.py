@@ -16,6 +16,11 @@ X = np.vstack((Xclass1,Xclass2))
 
 true_labels = np.hstack((np.zeros(len(Xclass1)), np.ones(len(Xclass2))))
 
+KMeans2 = KMeans(n_clusters=5, n_init=10, init='k-means++')
+KMeans2.fit(X)
+silhouette_avg = silhouette_score(X, KMeans2.labels_)
+print("pour le nombre de cluster K = ",KMeans2.n_clusters, " le coefficient de silhouette est :", silhouette_avg, "le coefficient d'inertie :", KMeans2.inertia_)
+
 inertias = []
 k_values = range(2, 11)
 
