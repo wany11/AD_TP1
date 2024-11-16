@@ -1,7 +1,6 @@
 from mimetypes import inited
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.cluster.vq import kmeans
 from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
 
@@ -32,6 +31,8 @@ KMeans5 = KMeans(n_clusters=5, n_init=10, init='k-means++')
 KMeans5.fit(X)
 KMeans6 = KMeans(n_clusters=6, n_init=10, init='k-means++')
 KMeans6.fit(X)
+
+kmeans = [ KMeans2, KMeans3, KMeans4, KMeans5, KMeans6]
 
 plt.figure(figsize = (18,12))
 
@@ -103,6 +104,10 @@ plt.title("KMeans6")
 plt.tight_layout()
 plt.show()
 
+k = 2
+for i in kmeans:
+    ars = adjusted_rand_score(true_labels, i.labels_)
+    print("Adjusted Rand Score de K = ", k, " score : ", ars)
+    k += 1
 
-ars = adjusted_rand_score(true_labels, KMeans2.labels_)
-print(ars)
+
