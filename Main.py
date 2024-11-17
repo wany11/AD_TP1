@@ -1,10 +1,12 @@
 from mimetypes import inited
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 from scipy.cluster.vq import kmeans
 from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
 
+'''
 # Définir les moyennes et la covariance pour les deux classes
 mean = np.array([0,0])
 mean2 = np.array([10,10])
@@ -102,7 +104,35 @@ plt.title("KMeans6")
 # Afficher les graphiques
 plt.tight_layout()
 plt.show()
+'''
+
+img=np.float32(mpimg.imread('Image.jpg'))
+img_data = img.reshape(-1, 3)  # Forme (256*256, 3)
+
+# Définir le nombre de couleurs souhaité
+k = 5  # Nombre de clusters (attention ne pas en mettre trop sinon temps très long)
+kmeans = KMeans(n_clusters=k, random_state=0).fit(img_data)
+
+# Obtenir les centres des clusters (nouvelles couleurs)
+centers = np.uint8(kmeans.cluster_centers_)
+# Obtenir les étiquettes des clusters pour chaque pixel
+labels = kmeans.labels_
+
+compressed_img_data = centers[labels]
+compressed_img = compressed_img_data.reshape(img.shape)  # Reformer l'image originale
+
+# Affichage des images
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.title("Image originale")
+plt.imshow(np.uint8(img))  # Image d'origine
+
+plt.subplot(1, 2, 2)
+plt.title(f"Image compressée ({k} couleurs)")
+plt.imshow(compressed_img / 255)  # Marche sans le /255
 
 
-ars = adjusted_rand_score(true_labels, KMeans2.labels_)
-print(ars)
+plt.show()
+
+#ars = adjusted_rand_score(true_labels, KMeans2.labels_)
+#print(ars)
