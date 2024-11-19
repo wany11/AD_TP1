@@ -1,4 +1,5 @@
 # Importation des bibliothèques nécessaires
+import numpy as np
 import pandas as pd
 from scipy.cluster.hierarchy import linkage, dendrogram
 from scipy.spatial.distance import pdist
@@ -20,9 +21,15 @@ distance_matrix = pdist(data_scaled, metric='euclidean')
 # Construction de l'arbre (méthode ward utilisée ici)
 linkage_matrix = linkage(distance_matrix, method='ward')
 
+
+# Choisir le seuil automatiquement avec Z_complete[:, 2]
+seuil_auto = np.max(linkage_matrix[-2, 2]) - 0.000001
+
+
 # Visualisation de l'arbre
 plt.figure(figsize=(10, 7))
-dendrogram(linkage_matrix, labels=data.index, leaf_rotation=90, leaf_font_size=10)
+dendrogram(linkage_matrix, labels=data.index, leaf_rotation=90, leaf_font_size=10, color_threshold=seuil_auto)
+plt.axhline(y=seuil_auto, color='red', linestyle='--', lw=1, label=f"Seuil automatique ({seuil_auto:.2f})")
 plt.title("Dendrogramme - Classification Hiérarchique Ascendante")
 plt.xlabel("Villes")
 plt.ylabel("Distance")
