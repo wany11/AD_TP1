@@ -33,4 +33,5 @@ plt.axhline(y=seuil_auto, color='red', linestyle='--', lw=1, label=f"Seuil autom
 plt.title("Dendrogramme - Classification Hiérarchique Ascendante")
 plt.xlabel("Villes")
 plt.ylabel("Distance")
+plt.legend()
 plt.show()
