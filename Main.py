@@ -64,7 +64,6 @@ plt.scatter(initial_centers[:, 0], initial_centers[:, 1],
 plt.scatter(final_centers[:, 0], final_centers[:, 1],
             label="Centres finaux", color='red', edgecolor='black', marker='X', s=200)
 
-
 plt.legend()
 plt.xlabel("Dimension 1")
 plt.ylabel("Dimension 2")
