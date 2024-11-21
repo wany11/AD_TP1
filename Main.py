@@ -23,7 +23,7 @@ distance_matrix = pdist(data_scaled, metric='euclidean')
 # Construction de l'arbre (méthode ward utilisée ici)
 linkage_matrix = linkage(distance_matrix, method='ward')
 
-# Choisir le seuil automatiquement avec Z_complete[:, 2]
+# Choisir le seuil
 seuil = 10 - 0.00000001
 
 # Visualisation de l'arbre
@@ -36,7 +36,7 @@ plt.ylabel("Distance")
 plt.legend()
 plt.show()
 
-# Découper l'arbre en clusters (par exemple, 4 clusters)
+# Découper l'arbre en clusters
 num_clusters = 10
 clusters = fcluster(linkage_matrix, num_clusters, criterion='maxclust')
 
@@ -78,7 +78,6 @@ for cluster in range(n_clusters):
 
 # Ajouter les centres des clusters
 centers = kmeans.cluster_centers_  # Ces centres sont dans l'espace des données normalisées
-# centers_transformed = kmeans.inverse_transform(centers)  # Ramener les centres dans l'espace d'origine (si nécessaire)
 
 # Annotation des villes
 for i, txt in enumerate(data.index):
