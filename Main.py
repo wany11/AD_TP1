@@ -1,8 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import progress
-from sklearn.cluster import KMeans
 import math
 
 def coalescence(x, K, g):
