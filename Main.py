@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score, silhouette_score, silhouette_samples
 from scipy.cluster.hierarchy import linkage as CAH, fcluster
 from scipy.cluster.hierarchy import dendrogram
@@ -20,7 +19,7 @@ true_labels = np.hstack((np.zeros(len(Xclass1)), np.ones(len(Xclass2))))
 # Calculer la CAH avec le linkage "complete"
 Z_complete = CAH(X, method="complete", metric="euclidean")
 
-# Déterminer le seuil pour K=3 clusters
+# On détermine le seuil pour K=3 clusters
 # On choisit une hauteur juste avant la fusion en deux clusters.
 seuil = Z_complete[-2, 2] - 0.000001
 
